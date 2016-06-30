@@ -5,6 +5,8 @@
 #define MEAL_SERVER_HH
 
 #include <memory>
+#include <string>
+#include <map>
 
 #include "Config.hh"
 #include "zod/SubService.hh"
@@ -21,6 +23,8 @@ class Server : public zod::MsgCallback {
 
  private:
   std::unique_ptr<Config> config_;
+
+  std::map<std::string, std::fstream*> map_fs_;
 
   std::unique_ptr<zod::SubService> sub_service_;
 };

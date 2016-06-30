@@ -5,6 +5,7 @@
 #include "Log.hh"
 #include "json/json.hh"
 #include "soil/DateTime.hh"
+#include "soil/FileSystem.hh"
 
 namespace meal {
 
@@ -12,6 +13,8 @@ Server::Server(int argc, char* argv[]) {
   MEAL_TRACE <<"Server::Server()";
 
   config_.reset(new Config(argc, argv));
+
+  soil::checkPath(config_->mealOptions()->data_path);
 
   sub_service_.reset(
       zod::SubService::create(
