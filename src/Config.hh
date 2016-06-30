@@ -23,6 +23,7 @@ class Options : public soil::Options {
 
   std::string xpub_addr;
   std::string data_path;
+  std::string file_prefix;
   std::string log_cfg;
 
  private:

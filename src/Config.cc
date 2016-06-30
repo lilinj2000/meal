@@ -19,6 +19,8 @@ Options::Options():
        "xpub address")
       ("meal.data_path", po::value<std::string>(&data_path),
        "path of the data")
+      ("meal.file_prefix", po::value<std::string>(&file_prefix),
+       "file prefix")
       ("meal.log_cfg", po::value<std::string>(&log_cfg),
          "log config file");
   return;

@@ -7,6 +7,7 @@
 #include <memory>
 #include <string>
 #include <map>
+#include <fstream>
 
 #include "Config.hh"
 #include "zod/SubService.hh"
@@ -20,6 +21,10 @@ class Server : public zod::MsgCallback {
   ~Server();
 
   virtual void msgCallback(const zod::Msg*);
+
+  std::fstream* getFileStream(const std::string& instru);
+
+  void output(std::fstream* f);
 
  private:
   std::unique_ptr<Config> config_;
