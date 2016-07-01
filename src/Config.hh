@@ -22,6 +22,7 @@ class Options : public soil::Options {
   virtual po::options_description* configOptions();
 
   std::string xpub_addr;
+  int out_type;
   std::string data_path;
   std::string file_prefix;
   std::string log_cfg;

@@ -24,8 +24,6 @@ class Server : public zod::MsgCallback {
 
   std::fstream* getFileStream(const std::string& instru);
 
-  void output(std::fstream* f);
-
  private:
   std::unique_ptr<Config> config_;
 

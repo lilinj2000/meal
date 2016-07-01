@@ -17,6 +17,8 @@ Options::Options():
   config_options_.add_options()
       ("meal.xpub_addr", po::value<std::string>(&xpub_addr),
        "xpub address")
+      ("meal.out_type", po::value<int>(&out_type),
+       "out type")
       ("meal.data_path", po::value<std::string>(&data_path),
        "path of the data")
       ("meal.file_prefix", po::value<std::string>(&file_prefix),

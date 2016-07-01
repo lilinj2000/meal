@@ -3,6 +3,9 @@ AUTOMAKE_OPTIONS = foreign
 bin_PROGRAMS = meal
 meal_SOURCES = \
 	Config.cc \
+	Out.cc \
+	SpeedOut.cc \
+	JsonOut.cc \
 	Server.cc \
 	Main.cc
 
@@ -26,6 +29,9 @@ meal_LDFLAGS = $(LIBADD_DL) -Wl,--no-as-needed -pthread
 # header files
 noinst_HEADERS = Config.hh \
 	Log.hh \
+	Out.hh \
+	SpeedOut.hh \
+	JsonOut.hh \
 	Server.hh
 
 EXTRA_DIST = env.sh meal.cfg log.cfg

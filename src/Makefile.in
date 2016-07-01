@@ -96,8 +96,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(mealdir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_meal_OBJECTS = meal-Config.$(OBJEXT) meal-Server.$(OBJEXT) \
-	meal-Main.$(OBJEXT)
+am_meal_OBJECTS = meal-Config.$(OBJEXT) meal-Out.$(OBJEXT) \
+	meal-SpeedOut.$(OBJEXT) meal-JsonOut.$(OBJEXT) \
+	meal-Server.$(OBJEXT) meal-Main.$(OBJEXT)
 meal_OBJECTS = $(am_meal_OBJECTS)
 am__DEPENDENCIES_1 =
 meal_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
@@ -340,6 +341,9 @@ top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
 meal_SOURCES = \
 	Config.cc \
+	Out.cc \
+	SpeedOut.cc \
+	JsonOut.cc \
 	Server.cc \
 	Main.cc
 
@@ -361,6 +365,9 @@ meal_LDFLAGS = $(LIBADD_DL) -Wl,--no-as-needed -pthread
 # header files
 noinst_HEADERS = Config.hh \
 	Log.hh \
+	Out.hh \
+	SpeedOut.hh \
+	JsonOut.hh \
 	Server.hh
 
 EXTRA_DIST = env.sh meal.cfg log.cfg
@@ -461,8 +468,11 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/meal-Config.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/meal-JsonOut.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/meal-Main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/meal-Out.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/meal-Server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/meal-SpeedOut.Po@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -498,6 +508,48 @@ meal-Config.obj: Config.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Config.cc' object='meal-Config.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o meal-Config.obj `if test -f 'Config.cc'; then $(CYGPATH_W) 'Config.cc'; else $(CYGPATH_W) '$(srcdir)/Config.cc'; fi`
+
+meal-Out.o: Out.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT meal-Out.o -MD -MP -MF $(DEPDIR)/meal-Out.Tpo -c -o meal-Out.o `test -f 'Out.cc' || echo '$(srcdir)/'`Out.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/meal-Out.Tpo $(DEPDIR)/meal-Out.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Out.cc' object='meal-Out.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o meal-Out.o `test -f 'Out.cc' || echo '$(srcdir)/'`Out.cc
+
+meal-Out.obj: Out.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT meal-Out.obj -MD -MP -MF $(DEPDIR)/meal-Out.Tpo -c -o meal-Out.obj `if test -f 'Out.cc'; then $(CYGPATH_W) 'Out.cc'; else $(CYGPATH_W) '$(srcdir)/Out.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/meal-Out.Tpo $(DEPDIR)/meal-Out.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Out.cc' object='meal-Out.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o meal-Out.obj `if test -f 'Out.cc'; then $(CYGPATH_W) 'Out.cc'; else $(CYGPATH_W) '$(srcdir)/Out.cc'; fi`
+
+meal-SpeedOut.o: SpeedOut.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT meal-SpeedOut.o -MD -MP -MF $(DEPDIR)/meal-SpeedOut.Tpo -c -o meal-SpeedOut.o `test -f 'SpeedOut.cc' || echo '$(srcdir)/'`SpeedOut.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/meal-SpeedOut.Tpo $(DEPDIR)/meal-SpeedOut.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='SpeedOut.cc' object='meal-SpeedOut.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o meal-SpeedOut.o `test -f 'SpeedOut.cc' || echo '$(srcdir)/'`SpeedOut.cc
+
+meal-SpeedOut.obj: SpeedOut.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT meal-SpeedOut.obj -MD -MP -MF $(DEPDIR)/meal-SpeedOut.Tpo -c -o meal-SpeedOut.obj `if test -f 'SpeedOut.cc'; then $(CYGPATH_W) 'SpeedOut.cc'; else $(CYGPATH_W) '$(srcdir)/SpeedOut.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/meal-SpeedOut.Tpo $(DEPDIR)/meal-SpeedOut.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='SpeedOut.cc' object='meal-SpeedOut.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o meal-SpeedOut.obj `if test -f 'SpeedOut.cc'; then $(CYGPATH_W) 'SpeedOut.cc'; else $(CYGPATH_W) '$(srcdir)/SpeedOut.cc'; fi`
+
+meal-JsonOut.o: JsonOut.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT meal-JsonOut.o -MD -MP -MF $(DEPDIR)/meal-JsonOut.Tpo -c -o meal-JsonOut.o `test -f 'JsonOut.cc' || echo '$(srcdir)/'`JsonOut.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/meal-JsonOut.Tpo $(DEPDIR)/meal-JsonOut.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='JsonOut.cc' object='meal-JsonOut.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o meal-JsonOut.o `test -f 'JsonOut.cc' || echo '$(srcdir)/'`JsonOut.cc
+
+meal-JsonOut.obj: JsonOut.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT meal-JsonOut.obj -MD -MP -MF $(DEPDIR)/meal-JsonOut.Tpo -c -o meal-JsonOut.obj `if test -f 'JsonOut.cc'; then $(CYGPATH_W) 'JsonOut.cc'; else $(CYGPATH_W) '$(srcdir)/JsonOut.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/meal-JsonOut.Tpo $(DEPDIR)/meal-JsonOut.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='JsonOut.cc' object='meal-JsonOut.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o meal-JsonOut.obj `if test -f 'JsonOut.cc'; then $(CYGPATH_W) 'JsonOut.cc'; else $(CYGPATH_W) '$(srcdir)/JsonOut.cc'; fi`
 
 meal-Server.o: Server.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meal_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT meal-Server.o -MD -MP -MF $(DEPDIR)/meal-Server.Tpo -c -o meal-Server.o `test -f 'Server.cc' || echo '$(srcdir)/'`Server.cc

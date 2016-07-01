@@ -4,6 +4,7 @@
 #include <boost/filesystem.hpp>
 #include "Server.hh"
 #include "Log.hh"
+#include "Out.hh"
 #include "json/json.hh"
 #include "soil/DateTime.hh"
 #include "soil/FileSystem.hh"
@@ -24,6 +25,10 @@ Server::Server(int argc, char* argv[]) {
 
 Server::~Server() {
   MEAL_TRACE <<"Server::~Server()";
+
+  for (auto f : map_fs_) {
+    delete f.second;
+  }
 }
 
 void Server::msgCallback(const zod::Msg* msg) {
@@ -33,51 +38,13 @@ void Server::msgCallback(const zod::Msg* msg) {
       reinterpret_cast<const char*>(msg->data_.get()),
       msg->len_);
 
-  // createObject()
-  // obj->Parse();
-  // obj->output();
+  std::unique_ptr<Out> out(Out::create(config_->mealOptions()->out_type));
 
-  json::Document doc;
-  json::fromString(data, &doc);
+  out->parse(data);
 
-  // instru info
-  std::string instru;
-  std::string update_time;
-  int update_millisec = 0;
+  std::fstream* f = getFileStream(out->instru());
 
-  // packet info
-  std::string timestamp;
-  std::string ts;
-
-  if (doc.HasMember("onReceiveMarketData")) {
-    json::Value& odata = doc["onReceiveMarketData"];
-
-    if (odata.HasMember("MarketDataField")) {
-      json::Value& mdata = odata["MarketDataField"];
-
-      if (mdata.HasMember("InstrumentID")) {
-        instru = mdata["InstrumentID"].GetString();
-      }
-
-      if (mdata.HasMember("UpdateTime")) {
-        update_time = mdata["UpdateTime"].GetString();
-      }
-
-      if (mdata.HasMember("UpdateMillisec")) {
-        update_millisec = mdata["UpdateMillisec"].GetInt();
-      }
-    }
-
-    if (odata.HasMember("timestamp")) {
-      timestamp = odata["timestamp"].GetString();
-    }
-
-    if (odata.HasMember("ts")) {
-      ts = odata["ts"].GetString();
-    }
-  }
-
-  std::fstream* f = getFileStream(instru);
+  out->output(*f);
 }
 
 std::fstream* Server::getFileStream(const std::string& instru) {
@@ -94,9 +61,6 @@ std::fstream* Server::getFileStream(const std::string& instru) {
   }
 
   return f;
-}
-
-void Server::output(std::fstream* f) {
 }
 
 };  // namespace meal
