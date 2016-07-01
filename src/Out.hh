@@ -22,7 +22,7 @@ class Out {
 
   virtual void output(std::fstream&) = 0;
 
-  static Out* create(int);
+  static Out* create(int type);
 
   std::string& instru() {
     return instru_;

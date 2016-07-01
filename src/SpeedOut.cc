@@ -22,7 +22,7 @@ void SpeedOut::parse(const std::string& msg) {
 
     if (odata.HasMember("MarketDataField")) {
       json::Value& mdata = odata["MarketDataField"];
-      
+
       if (mdata.HasMember("InstrumentID")) {
         instru() = mdata["InstrumentID"].GetString();
       }
@@ -55,7 +55,7 @@ void SpeedOut::output(std::fstream& f) {
 
   std::chrono::system_clock::duration d1 = t1_time - t0_time;
   std::chrono::system_clock::duration d2 = t2_time - t0_time;
-  
+
   f <<instru() <<"\t"
     <<update_time_ <<"." <<update_millisec_ <<"\t"
     <<ts_ <<"\t"

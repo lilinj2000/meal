@@ -20,7 +20,7 @@ void JsonOut::parse(const std::string& msg) {
 
     if (odata.HasMember("MarketDataField")) {
       json::Value& mdata = odata["MarketDataField"];
-      
+
       if (mdata.HasMember("InstrumentID")) {
         instru() = mdata["InstrumentID"].GetString();
       }
