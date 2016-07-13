@@ -56,7 +56,7 @@ std::fstream* Server::getFileStream(const std::string& instru) {
     f = new std::fstream(config_->mealOptions()->data_path
                          + boost::filesystem::path::preferred_separator
                          + config_->mealOptions()->file_prefix
-                         + instru + ".data");
+                         + instru + ".data", std::fstream::out);
     map_fs_[instru] = f;
   }
 
